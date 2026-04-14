@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { BiSearchAlt2 } from "react-icons/bi";
 import { HiMenu, HiX } from "react-icons/hi";
-import { Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,11 +14,42 @@ const Navbar = () => {
         <h1 className="text-2xl font-bold text-blue-600">TopMates</h1>
 
         {/* Desktop Links */}
-        <ul className="hidden md:flex gap-8 text-gray-700 font-medium">
-          <li className="hover:text-blue-600 cursor-pointer">Home</li>
-          <li className="hover:text-blue-600 cursor-pointer">Products</li>
-          <li className="hover:text-blue-600 cursor-pointer">Features</li>
-          <li className="hover:text-blue-600 cursor-pointer">About</li>
+        <ul className="hidden md:flex gap-8 text-gray-700 font-medium absolute left-1/2 transform -translate-x-1/2">
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              isActive ? "text-blue-600 font-semibold" : "hover:text-blue-600"
+            }
+          >
+            Home
+          </NavLink>
+
+          <NavLink
+            to="/products"
+            className={({ isActive }) =>
+              isActive ? "text-blue-600 font-semibold" : "hover:text-blue-600"
+            }
+          >
+            Products
+          </NavLink>
+
+          <NavLink
+            to="/features"
+            className={({ isActive }) =>
+              isActive ? "text-blue-600 font-semibold" : "hover:text-blue-600"
+            }
+          >
+            Features
+          </NavLink>
+
+          <NavLink
+            to="/about"
+            className={({ isActive }) =>
+              isActive ? "text-blue-600 font-semibold" : "hover:text-blue-600"
+            }
+          >
+            About
+          </NavLink>
         </ul>
 
         {/* Right Section */}
@@ -56,10 +87,45 @@ const Navbar = () => {
       {isOpen && (
         <div className="md:hidden mt-4 flex flex-col gap-4 bg-gray-50 p-4 rounded-lg">
           <ul className="flex flex-col gap-3 text-gray-700 font-medium">
-            <li>Home</li>
-            <li>Products</li>
-            <li>Features</li>
-            <li>About</li>
+            <NavLink
+              to="/"
+              onClick={() => setIsOpen(false)}
+              className={({ isActive }) =>
+                isActive ? "text-blue-600 font-semibold" : ""
+              }
+            >
+              Home
+            </NavLink>
+
+            <NavLink
+              to="/products"
+              onClick={() => setIsOpen(false)}
+              className={({ isActive }) =>
+                isActive ? "text-blue-600 font-semibold" : ""
+              }
+            >
+              Products
+            </NavLink>
+
+            <NavLink
+              to="/features"
+              onClick={() => setIsOpen(false)}
+              className={({ isActive }) =>
+                isActive ? "text-blue-600 font-semibold" : ""
+              }
+            >
+              Features
+            </NavLink>
+
+            <NavLink
+              to="/about"
+              onClick={() => setIsOpen(false)}
+              className={({ isActive }) =>
+                isActive ? "text-blue-600 font-semibold" : ""
+              }
+            >
+              About
+            </NavLink>
           </ul>
 
           {/* Search */}
