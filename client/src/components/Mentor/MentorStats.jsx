@@ -8,7 +8,7 @@ const stats = [
     color: "bg-blue-100 text-blue-600"
   },
   {
-    title: "Total Students",
+    title: "Total Assigned Students",
     value: 48,
     icon: <FaUsers />,
     color: "bg-green-100 text-green-600"

@@ -29,10 +29,10 @@ const MentorTable = () => {
       {/* Table Header */}
       <div className="grid grid-cols-6 bg-gray-100 p-3 rounded-lg text-sm font-semibold text-gray-600">
         <span>Name</span>
-        <span>Subject</span>
+        <span>Domain</span>
         <span>Experience</span>
         <span>Availability</span>
-        <span>Students</span>
+        <span>Assigned Students</span>
         <span>Status</span>
       </div>
 
@@ -53,11 +53,11 @@ const MentorTable = () => {
               />
               <div>
                 <p className="font-medium">{mentor.name}</p>
-                <p className="text-xs text-gray-500">Admin</p>
+                <p className="text-xs text-gray-500">Mentor</p>
               </div>
             </div>
 
-            <span>{mentor.subject}</span>
+            <span>{mentor.domain}</span>
             <span>{mentor.experience}</span>
             <span className="text-sm">{mentor.availability}</span>
             <span>{mentor.students}</span>

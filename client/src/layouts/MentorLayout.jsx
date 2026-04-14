@@ -21,10 +21,6 @@ const MentorLayout = ({ children }) => {
             </li>
 
             <li className="flex items-center gap-3 p-3 hover:bg-blue-700 rounded-lg cursor-pointer">
-              <FaUsers /> My Students
-            </li>
-
-            <li className="flex items-center gap-3 p-3 hover:bg-blue-700 rounded-lg cursor-pointer">
               <FaCalendar /> Schedule
             </li>
           </ul>

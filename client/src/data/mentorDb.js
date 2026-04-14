@@ -2,7 +2,7 @@ const mentors = [
   {
     id: 1,
     name: "Ravi Kumar",
-    subject: "UPSC",
+    domain: "UPSC",
     experience: "8 years",
     availability: "Mon-Fri / 10AM-1PM",
     students: 120,
@@ -12,7 +12,7 @@ const mentors = [
   {
     id: 2,
     name: "Anita Singh",
-    subject: "BPSC",
+    domain: "BPSC",
     experience: "5 years",
     availability: "Mon-Sat / 2PM-5PM",
     students: 90,
@@ -22,7 +22,7 @@ const mentors = [
   {
     id: 3,
     name: "Amit Verma",
-    subject: "Computer Science",
+    domain: "Computer Science",
     experience: "7 years",
     availability: "Mon-Fri / 3PM-6PM",
     students: 75,
@@ -32,7 +32,7 @@ const mentors = [
   {
     id: 4,
     name: "Manish Joshi",
-    subject: "Mathematics",
+    domain: "Mathematics",
     experience: "4 years",
     availability: "Mon-Fri / 9AM-11AM",
     students: 60,
@@ -42,7 +42,7 @@ const mentors = [
   {
     id: 5,
     name: "Priya Shah",
-    subject: "UPSC",
+    domain: "UPSC",
     experience: "6 years",
     availability: "Mon-Fri / 12PM-3PM",
     students: 85,

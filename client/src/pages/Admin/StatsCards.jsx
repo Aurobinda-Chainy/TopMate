@@ -3,7 +3,7 @@ import { FaUserGraduate, FaChalkboardTeacher, FaBook, FaVideo } from "react-icon
 const stats = [
   {
     id: 1,
-    title: "Total Students",
+    title: "Total Enrolled",
     value: "1,250",
     icon: <FaUserGraduate />,
     bg: "bg-green-100",
@@ -19,7 +19,7 @@ const stats = [
   },
   {
     id: 3,
-    title: "Active Programs",
+    title: "Unassigned Mentors",
     value: "15",
     icon: <FaBook />,
     bg: "bg-orange-100",
@@ -27,7 +27,7 @@ const stats = [
   },
   {
     id: 4,
-    title: "Ongoing Sessions",
+    title: "Ongoing Batches",
     value: "23",
     icon: <FaVideo />,
     bg: "bg-purple-100",

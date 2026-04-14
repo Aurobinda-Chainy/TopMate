@@ -68,7 +68,7 @@ const BatchList = () => {
 
               {/* Info */}
               <div className="flex justify-between text-gray-500 text-sm">
-                <span>{batch.lessons}</span>
+                <span>{batch.sessions}</span>
                 <span>{batch.students}</span>
                 <span>{batch.duration}</span>
               </div>

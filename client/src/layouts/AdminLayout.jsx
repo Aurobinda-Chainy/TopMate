@@ -1,12 +1,12 @@
-import { FaUserGraduate, FaChalkboardTeacher, FaUsers, FaBook } from "react-icons/fa";
-import { FiSettings, FiLogOut, FiSearch } from "react-icons/fi";
+import { FaBook, FaChalkboardTeacher, FaUserGraduate, FaUsers } from "react-icons/fa";
+import { FiLogOut, FiSearch, FiSettings } from "react-icons/fi";
 
 const AdminLayout = ({ children }) => {
   return (
     <div className="flex h-screen bg-gray-100">
 
       {/* Sidebar */}
-      <div className="w-64 bg-gradient-to-b from-blue-900 to-blue-700 text-white flex flex-col justify-between">
+      <div className="w-64 bg-linear-to-b from-blue-900 to-blue-700 text-white flex flex-col justify-between">
 
         {/* Top */}
         <div>
