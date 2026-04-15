@@ -5,6 +5,7 @@ import Login from "../pages/Auth/Login";
 import AdminDashboard from "../pages/Admin/AdminDashboard";
 import MentorDashboard from "../pages/Mentor/MentorDashboard";
 import StudentDashboard from "../pages/Student/StudentDashboard";
+import StudentsPage from "../components/Student/StudentsPage";
 
  const AppRoutes = () =>{
     return (
