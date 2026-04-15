@@ -16,6 +16,7 @@ import StudentDashboard from "../pages/Student/StudentDashboard";
                 <Route path="/admin" element={<AdminDashboard/>}/>
                 <Route path="/mentor" element={<MentorDashboard/>}/>
                 <Route path="/student" element={<StudentDashboard/>}/>
+                <Route path="/admin/students" element={<StudentsPage />} />
             </Routes>
         </BrowserRouter>
     )
