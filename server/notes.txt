@@ -1,0 +1,3 @@
+LH5I5wlvAVkVUdeF
+
+mongodb+srv://ed-tech-server:LH5I5wlvAVkVUdeF@ed-tech.zaovoaj.mongodb.net/
