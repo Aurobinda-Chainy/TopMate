@@ -10,6 +10,7 @@ const batches = [
     rating: "4.8",
     image: "/course1.png",
   },
+  
   {
     id: 2,
     title: "BPSC Crash Course",
