@@ -6,6 +6,7 @@ import AdminDashboard from "../pages/Admin/AdminDashboard";
 import MentorDashboard from "../pages/Mentor/MentorDashboard";
 import StudentDashboard from "../pages/Student/StudentDashboard";
 import StudentsPage from "../components/Student/StudentsPage";
+import AboutPage from "../components/About/AboutPage";
 
  const AppRoutes = () =>{
     return (
@@ -18,6 +19,8 @@ import StudentsPage from "../components/Student/StudentsPage";
                 <Route path="/mentor" element={<MentorDashboard/>}/>
                 <Route path="/student" element={<StudentDashboard/>}/>
                 <Route path="/admin/students" element={<StudentsPage />} />
+
+                <Route path="/about" element={<AboutPage/>}/>
             </Routes>
         </BrowserRouter>
     )
