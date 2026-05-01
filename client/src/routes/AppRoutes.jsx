@@ -6,7 +6,8 @@ import AdminDashboard from "../pages/Admin/AdminDashboard";
 import MentorDashboard from "../pages/Mentor/MentorDashboard";
 import StudentDashboard from "../pages/Student/StudentDashboard";
 import StudentsPage from "../components/Student/StudentsPage";
-import AboutPage from "../components/About/AboutPage";
+import AboutPage from "../pages/About/AboutPage";
+import ProductsPage from "../pages/Product/ProductsPage";
 
  const AppRoutes = () =>{
     return (
@@ -21,6 +22,8 @@ import AboutPage from "../components/About/AboutPage";
                 <Route path="/admin/students" element={<StudentsPage />} />
 
                 <Route path="/about" element={<AboutPage/>}/>
+                <Route path="/products" element={<ProductsPage/>}/>
+               
             </Routes>
         </BrowserRouter>
     )
