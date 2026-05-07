@@ -37,7 +37,7 @@ const Hero = () => {
       {/* Right Image */}
       <div className="md:w-1/2 mt-10 md:mt-0 flex justify-center">
         <img
-          src="/hero.png"   // put your image in public folder
+          src="/ban.png"   // put your image in public folder
           alt="learning"
           className="w-[400px] md:w-[500px] object-contain"
         />

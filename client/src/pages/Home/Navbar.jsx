@@ -11,7 +11,7 @@ const Navbar = () => {
       {/* Top Bar */}
       <div className="flex items-center justify-between">
         {/* Logo */}
-        <h1 className="text-2xl font-bold text-blue-600">TopMates</h1>
+        <h1 className="text-2xl font-bold text-blue-600">MentorSphere</h1>
 
         {/* Desktop Links */}
         <ul className="hidden md:flex gap-8 text-gray-700 font-medium absolute left-1/2 transform -translate-x-1/2">
