@@ -1,10 +1,15 @@
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate} from "react-router-dom";
+
+
 
 const Login = () => {
 
   const [email,setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
 
   const handleLogin = async () =>{
     try {
@@ -18,7 +23,19 @@ const Login = () => {
         withCredentials: true
        }
       );
-       console.log("Login Success",res.data);
+       
+      const {accessToken,user} = res.data;
+
+       localStorage.setItem("accessToken",res.data.accessToken);
+       localStorage.setItem("user",JSON.stringify(user));
+
+       if(user.role === "admin"){
+        navigate("/admin")
+       }else if(user.role === "mentor"){
+        navigate("/mentor");
+       }else{
+        navigate("/")
+       }
     }catch(err){
       console.log("Login Error", err.response?.data || err.message);
     }
