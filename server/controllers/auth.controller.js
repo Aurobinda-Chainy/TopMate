@@ -3,6 +3,7 @@ import crypto from "crypto";
 import jwt from "jsonwebtoken";
 import config from "../config/config.js";
 import sessionModel from "../models/session.model.js";
+import bcrypt from "bcryptjs";
 
 export async function register(req,res) {
     
@@ -21,7 +22,7 @@ export async function register(req,res) {
         });
     }
 
-    const hashedPassword = crypto.createHash("sha256").update(password).digest("hex");
+    const hashedPassword = await bcrypt.hash(password,10);
 
     const user = await userModel.create({
         username,
@@ -49,10 +50,11 @@ export async function register(req,res) {
 
     const accessToken = jwt.sign({
         id:user._id,
+        role:user.role,
         sessionId: session._id
     },config.JWT_SECRET,
         {
-            expiresIn:"15m"
+            expiresIn:"1d"
         }
     )
 
@@ -125,7 +127,7 @@ export async function refreshToken(req, res) {
         id: decoded.id
     }, config.JWT_SECRET,
         {
-            expiresIn: "15m"
+            expiresIn: "1d"
         }
     )
 
@@ -221,9 +223,9 @@ export async function login(req, res) {
         })
     }
 
-    const hashedPassword = crypto.createHash("sha256").update(password).digest("hex");
+    
 
-    const isPasswordValid = hashedPassword === user.password;
+    const isPasswordValid = await bcrypt.compare(password, user.password);
     
     if(!isPasswordValid){
         return res.status(401).json({
@@ -250,17 +252,18 @@ export async function login(req, res) {
 
     const accessToken = jwt.sign({
         id: user._id,
+        role: user.role,
         sessionId: session._id
     }, config.JWT_SECRET,
         {
-            expiresIn: "15m"
+            expiresIn: "1d"
         }
     )
 
     res.cookie("refreshToken", refreshToken,{
         httpOnly: true,
-        secure: true,
-        sameSite: "strict",
+        secure: false,
+        sameSite: "lax",
         maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
     })
 
@@ -269,6 +272,7 @@ export async function login(req, res) {
         user:{
             username: user.username,
             email: user.email,
+            role: user.role,
         },
         accessToken,
     })
