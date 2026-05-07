@@ -10,6 +10,7 @@ import AboutPage from "../pages/About/AboutPage";
 import ProductsPage from "../pages/Product/ProductsPage";
 import AdminProtectedRoute from "./AdminProtectedRoute";
 import VideoCallPage from "../pages/VideoCall/VideoCallPage";
+import MentorSphereFeaturesPage from "../pages/Features/FeaturesPage";
 
  const AppRoutes = () =>{
     return (
@@ -31,6 +32,7 @@ import VideoCallPage from "../pages/VideoCall/VideoCallPage";
                 <Route path="/admin/students" element={<StudentsPage />} />
 
                 <Route path="/about" element={<AboutPage/>}/>
+                <Route path="/features" element={<MentorSphereFeaturesPage/>}/>
                 <Route path="/products" element={<ProductsPage/>}/>
 
                 <Route path="/video-call" element={<VideoCallPage/>}/>

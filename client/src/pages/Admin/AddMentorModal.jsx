@@ -1,146 +1,200 @@
 import axios from "axios";
 import { useState } from "react";
-import {FiX} from "react-icons/fi";
+import { FiX } from "react-icons/fi";
 
-const AddMentorModal  = ({ isOpen, onClose})=>{
-    const [form, setForm] = useState({
-        username:"",
-        email: "",
-        password: "",
-        domain: "",
-        experience:"",
-        availability:"",
-        image: null,
+const AddMentorModal = ({ isOpen, onClose }) => {
+  const [loading, setLoading] = useState(false);
+
+  const [form, setForm] = useState({
+    username: "",
+    email: "",
+    password: "",
+    domain: "",
+    experience: "",
+    availability: "",
+  });
+
+  if (!isOpen) return null;
+
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
     });
+  };
 
-    if(!isOpen) return null;
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-    const handleChange = (e) =>{
-        const {name,value,files} = e.target;
+    setLoading(true);
 
-        if(name === "image"){
-            setForm({ ...form, image: files[0] });
-        }else{
-            setForm({ ...form, [name]: value});
-        }
-    };
+    try {
+      const res = await axios.post(
+        "http://localhost:3000/api/admin/create-mentor",
+        form,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+          withCredentials: true,
+        },
+      );
 
-    const handleSubmit =async (e) =>{
-        e.preventDefault();
+      console.log("Mentor Created", res.data);
 
-        try{
-            const formData =  new FormData();
+      alert("Mentor created successfully");
 
-            formData.append("username", form.username);
-            formData.append("email", form.email);
-            formData.append("password", form.password);
-            formData.append("domain", form.domain);
-            formData.append("availability", form.availability);
-            formData.append("experience", form.experience);
+      onClose();
+    } catch (error) {
+      console.error(
+        "Create Mentor Error:",
+        error.response?.data || error.message,
+      );
 
-            if(form.image){
-                formData.append("image",form.image);
-            }
+      alert(error.response?.data?.message || "Error creating mentor");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-            const res = await axios.post(
-                "http://localhost:3000/api/admin/create-mentor",
-                formData,
-                {
-                    headers:{
-                        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-                    },
-                    withCredentials: true,
-                }
-            );
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm px-4">
+      <div className="relative w-full max-w-2xl rounded-3xl border border-white/10 bg-[#0f172a] p-8 text-white shadow-2xl">
+        <button
+          onClick={onClose}
+          className="absolute right-5 top-5 text-gray-400 transition hover:text-white"
+        >
+          <FiX size={24} />
+        </button>
 
-            console.log("Mentor Created", res.data);
+        <h2 className="mb-8 text-3xl font-bold text-cyan-400">
+          Add New Mentor
+        </h2>
 
-            alert("Mentor created successfully");
+        <form
+          onSubmit={handleSubmit}
+          className="grid grid-cols-1 gap-5 md:grid-cols-2"
+        >
+          {/* Username */}
+          <div>
+            <label className="mb-2 block text-sm text-gray-300">
+              Mentor Name
+            </label>
 
-            onClose();
-        } catch (error){
-            console.error("Create Mentor Error:", error.response?.data || error.message);
-            alert("Error creating mentor");
-        }
-    };
+            <input
+              type="text"
+              name="username"
+              value={form.username}
+              onChange={handleChange}
+              placeholder="Enter mentor name"
+              className="w-full rounded-xl border border-white/10 bg-white/5 p-4 text-white outline-none transition focus:border-cyan-400"
+              required
+            />
+          </div>
 
-    return(
-        <div className="fixed inset-0 bg-black/40 flex justify-center items-center z-50">
-            <div className="bg-white w-full max-w-lg rounded-xl shadow-lg p-6 relative">
-                <button
-                    onClick={onClose}
-                    className="absolute top-3 right-3 text-gray-500 hover:text-black"
-                >
-                    <FiX size={20} />
-                </button>
+          {/* Email */}
+          <div>
+            <label className="mb-2 block text-sm text-gray-300">Email</label>
 
-                <h2 className="text-xl font-semibold mb-4">
-                    Add New Mentor
-                </h2>
+            <input
+              type="email"
+              name="email"
+              value={form.email}
+              onChange={handleChange}
+              placeholder="Enter email"
+              className="w-full rounded-xl border border-white/10 bg-white/5 p-4 text-white outline-none transition focus:border-cyan-400"
+              required
+            />
+          </div>
 
-                <form onSubmit={handleSubmit} className="space-y-3">
-                    <input name="username"
-                    placeholder="Full Name"
-                    className="w-full border p-2 rounded"
-                    onChange={handleChange}
-                    />
+          {/* Password */}
+          <div>
+            <label className="mb-2 block text-sm text-gray-300">
+              Temporary Password
+            </label>
 
-                    <input name="email"
-                    placeholder="Email"
-                    className="w-full border p-2 rounded"
-                    onChange={handleChange}
-                    />
+            <input
+              type="password"
+              name="password"
+              value={form.password}
+              onChange={handleChange}
+              placeholder="Enter password"
+              className="w-full rounded-xl border border-white/10 bg-white/5 p-4 text-white outline-none transition focus:border-cyan-400"
+              required
+            />
+          </div>
 
-                    <input name="password"
-                    placeholder="Password"
-                    className="w-full border p-2 rounded"
-                    onChange={handleChange}
-                    />
-                    
-                    <input name="domain"
-                    placeholder="Domain (UPSC /CS)"
-                    className="w-full border p-2 rounded"
-                    onChange={handleChange}
-                    />
-                    <input name="experience"
-                    placeholder="Experience (e.g. 5 years)"
-                    className="w-full border p-2 rounded"
-                    onChange={handleChange}
-                    />
-                    
-                    <input name="availability"
-                    placeholder="availability (Mon-Fri)"
-                    className="w-full border p-2 rounded"
-                    onChange={handleChange}
-                    />
-                    <input type="file"
-                    name="image"
-                    className="w-full border p-2 rounded"
-                    onChange={handleChange}
-                    />
+          {/* Domain */}
+          <div>
+            <label className="mb-2 block text-sm text-gray-300">Domain</label>
 
-                    <div className="flex justify-end gap-3 pt-3">
-                        <button
-                            type="button"
-                            onClick={onClose}
-                            className="px-4 py-2 bg-gray-200 rounded"
-                        >
-                            Cancel
-                        </button>
+            <input
+              type="text"
+              name="domain"
+              value={form.domain}
+              onChange={handleChange}
+              placeholder="e.g. UPSC, CS, BPSC"
+              className="w-full rounded-xl border border-white/10 bg-white/5 p-4 text-white outline-none transition focus:border-cyan-400"
+            />
+          </div>
 
-                        <button
-                            type="submit"
-                            className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
-                        >
-                            Create Mentor
-                        </button>
-                    </div>
+          {/* Experience */}
+          <div>
+            <label className="mb-2 block text-sm text-gray-300">
+              Experience
+            </label>
 
-                </form>
-            </div>
-        </div>
-    )
+            <input
+              type="text"
+              name="experience"
+              value={form.experience}
+              onChange={handleChange}
+              placeholder="e.g. 5 Years"
+              className="w-full rounded-xl border border-white/10 bg-white/5 p-4 text-white outline-none transition focus:border-cyan-400"
+            />
+          </div>
 
-}
+          {/* Availability */}
+          <div>
+            <label className="mb-2 block text-sm text-gray-300">
+              Availability
+            </label>
+
+            <select
+              name="availability"
+              value={form.availability}
+              onChange={handleChange}
+              className="w-full rounded-xl border border-white/10 bg-[#1e293b] p-4 text-white outline-none transition focus:border-cyan-400"
+            >
+              <option value="">Select Availability</option>
+              <option value="Available">Available</option>
+              <option value="Busy">Busy</option>
+              <option value="Offline">Offline</option>
+            </select>
+          </div>
+
+          {/* Buttons */}
+          <div className="col-span-1 mt-4 flex justify-end gap-4 md:col-span-2">
+            <button
+              type="button"
+              onClick={onClose}
+              className="rounded-xl border border-white/10 px-6 py-3 transition hover:border-red-400 hover:text-red-400"
+            >
+              Cancel
+            </button>
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="rounded-xl bg-cyan-500 px-6 py-3 font-semibold text-black transition hover:bg-cyan-400 disabled:opacity-50"
+            >
+              {loading ? "Creating..." : "Create Mentor"}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};
 
 export default AddMentorModal;
